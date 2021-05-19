@@ -16,7 +16,9 @@
     <ul>
       <li v-for="(item, index) in items" :key="index">{{ item }}</li>
     </ul>
-    <input type="text" v-model="item">
+      名字<input type="text" v-model="name">
+      年龄 <input type="text" v-model="age">
+      性别 <input type="text" v-model="gender">
     <button @click="postApi">添加</button>
   </div>
 
@@ -30,7 +32,9 @@
       data: function () {
         return {
           items: [],
-          item: '',
+          name: '',
+          age:"",
+          gender:""
         }
       },
       created() {
@@ -46,8 +50,9 @@
       methods: {
         // 点击按钮提交数据
         postApi() {
+          let {name,age,gender}=this
           axios.post('http://localhost:3000/', {
-            item: this.item
+            name,age,gender
           }).then(res => {
             console.log("\n【API - post 数据】")
             console.log(res);
